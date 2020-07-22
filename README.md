@@ -1,0 +1,2 @@
+# hw_game_adsdk_cocoapods
+hw_game_adsdk_cocoapods
