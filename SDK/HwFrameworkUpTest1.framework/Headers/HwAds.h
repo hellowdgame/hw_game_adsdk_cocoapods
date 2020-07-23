@@ -188,9 +188,10 @@ typedef NS_ENUM(NSUInteger, HWSDKState)
            label:(NSString *)label;
 
 /// 打点新方法
-/// @param placementId 广告ID （若内购打点请将国家和金额用#拼接成字符串后传入，拼接规则：US#1.99        特别说明： 金额是转换成美金的价格）
+/// @param placementId 广告ID （若内购打点请将国家和金额用#拼接成字符串后传入，拼接规则：US#1.99        特别说明： 金额是转换成美金的价格;）
 /// @param state 广告当前的状态（若为内购打点请传入HwPurchase状态）
-/// @param isReward 是否为激励广告（若为内购打点请传入NO）
+/// @param isReward 是否为激励广告（若为内购打点请传入NO）；
+/// @param channel 渠道名称（内购打点请传空字符串@""）
 - (void)hwAdsEventByPlacementId:(NSString *)placementId hwSdkState:(HWSDKState)state isReward:(BOOL)isReward Channel:(NSString *)channel;
 
 @end

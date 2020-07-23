@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "hw_game_adsdk_cocoapods"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "用于请求HW广告,一键集成SDK"
 
   # This description is used to generate tags and improve search results.
