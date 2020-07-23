@@ -5,7 +5,7 @@ hw_game_adsdk_cocoapods
 
 ## 接入文档
 
-接入请参考：[SDK接入文档](https://github.com/artwl/hwsdk_ios/wiki/SDK%E6%8E%A5%E5%85%A5%E6%96%87%E6%A1%A3)
+接入请参考：[SDK接入文档](https://github.com/hellowdgame/hw_game_adsdk_cocoapods/wiki/%E6%8E%A5%E5%85%A5%E8%AF%B4%E6%98%8E)
 
 ## 需要帮助？
 
