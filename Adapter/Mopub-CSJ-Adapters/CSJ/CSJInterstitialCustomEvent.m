@@ -22,7 +22,7 @@
 
 @property (nonatomic, strong) BUFullscreenVideoAd *fullScreenVideo;
 @property (nonatomic, copy) NSString *placementId;
-
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation CSJInterstitialCustomEvent
@@ -83,6 +83,7 @@
         
         [self.fullScreenVideo showAdFromRootViewController:controller];
         [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:NO Channel:@"CSJ"];
+        self.isClick = NO;
         MPLogAdEvent([MPLogEvent adDidAppearForAdapter:NSStringFromClass(self.class)], self.placementId);
         [self.delegate interstitialCustomEventDidAppear:self];
     }
@@ -148,7 +149,11 @@
  This method is called when video ad is clicked.
  */
 - (void)fullscreenVideoAdDidClick:(BUFullscreenVideoAd *)fullscreenVideoAd{
-    [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"CSJ"];
+    if (!self.isClick) {
+        [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"CSJ"];
+        self.isClick = YES;
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 

@@ -22,7 +22,7 @@
 
 @property (nonatomic) MPMRAIDInterstitialViewController *interstitial;
 @property (nonatomic) BOOL adAvailable;
-
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @interface MPMoPubRewardedVideoCustomEvent (MPInterstitialViewControllerDelegate) <MPInterstitialViewControllerDelegate>
@@ -86,6 +86,7 @@
         return;
     }
     [[HwAds instance]hwAdsEventByPlacementId:@"mopub" hwSdkState:show isReward:YES Channel:@"Mopub"];
+    self.isClick = NO;
     [self.interstitial presentInterstitialFromViewController:viewController complete:^(NSError * error) {
         if (error != nil) {
             onShowError(error);
@@ -153,7 +154,11 @@
 
 - (void)interstitialDidReceiveTapEvent:(id<MPInterstitialViewController>)interstitial
 {
-    [[HwAds instance]hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:YES Channel:@"Mopub"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance]hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:YES Channel:@"Mopub"];
+    }
+    
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
 }
 

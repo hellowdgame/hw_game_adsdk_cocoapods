@@ -25,7 +25,7 @@
 @property (nonatomic, strong) MPRealTimeTimer *expirationTimer;
 @property (nonatomic, assign) BOOL hasTrackedImpression;
 @property (nonatomic, copy) NSString *fbPlacementId;
-
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation FacebookRewardedVideoCustomEvent
@@ -98,6 +98,7 @@
     {
         MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.fbPlacementId);
         [[HwAds instance] hwAdsEventByPlacementId:self.fbPlacementId hwSdkState:show isReward:YES Channel:@"Facebook"];
+        self.isClick = NO;
         MPLogAdEvent([MPLogEvent adWillAppearForAdapter:NSStringFromClass(self.class)], self.fbPlacementId);
         [self.delegate rewardedVideoWillAppearForCustomEvent:self];
 
@@ -138,7 +139,11 @@
 - (void)rewardedVideoAdDidClick:(FBRewardedVideoAd *)rewardedVideoAd
 {
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], self.fbPlacementId);
-    [[HwAds instance] hwAdsEventByPlacementId:self.fbPlacementId hwSdkState:click isReward:YES Channel:@"Facebook"];
+    if (!self.isClick) {
+        [[HwAds instance] hwAdsEventByPlacementId:self.fbPlacementId hwSdkState:click isReward:YES Channel:@"Facebook"];
+        self.isClick = YES;
+    }
+    
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self ];
 }
 

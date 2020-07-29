@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSTimer *queryTimer;
 @property (nonatomic, copy) NSString *adm;
 
+@property (nonatomic, assign) BOOL isClick;
+
 @property (nonatomic, readwrite, strong) MTGInterstitialVideoAdManager *mtgInterstitialVideoAdManager;
 @property (nonatomic,strong) MTGBidInterstitialVideoAdManager *ivBidAdManager;
 @end
@@ -88,6 +90,7 @@
     [defaults setObject:@"Mintegral" forKey:@"hwintertype"];
     [defaults synchronize];
     [[HwAds instance] hwAdsEventByPlacementId:self.adUnitId hwSdkState:show isReward:NO Channel:@"Mintegral"];
+    self.isClick = NO;
     if (self.adm) {
         MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
         
@@ -149,7 +152,11 @@
 
 - (void)onInterstitialVideoAdClick:(MTGInterstitialVideoAdManager *_Nonnull)adManager{
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], self.adUnitId);
-    [[HwAds instance] hwAdsEventByPlacementId:self.adUnitId hwSdkState:click isReward:NO Channel:@"Mintegral"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.adUnitId hwSdkState:click isReward:NO Channel:@"Mintegral"];
+    }
+    
     if (self.delegate && [self.delegate respondsToSelector:@selector(trackClick)]) {
         [self.delegate trackClick];
     }

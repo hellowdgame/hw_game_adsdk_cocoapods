@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) GDTUnifiedInterstitialAd *gdtInterstitial;
 @property (nonatomic, copy) NSString *placementId;
-
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation GdtInterstitialCustomEvent
@@ -79,6 +79,7 @@
         MPLogAdEvent([MPLogEvent adWillAppearForAdapter:NSStringFromClass(self.class)], self.placementId);
         [self.delegate interstitialCustomEventWillAppear:self];
         [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:NO Channel:@"GDT"];
+        self.isClick = NO;
         [self.gdtInterstitial presentAdFromRootViewController:controller];
         MPLogAdEvent([MPLogEvent adDidAppearForAdapter:NSStringFromClass(self.class)], self.placementId);
         [self.delegate interstitialCustomEventDidAppear:self];
@@ -172,7 +173,11 @@
  *  插屏2.0广告点击回调
  */
 - (void)unifiedInterstitialClicked:(GDTUnifiedInterstitialAd *)unifiedInterstitial{
-    [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"GDT"];
+    if (!self.isClick) {
+        [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"GDT"];
+        self.isClick = YES;
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 

@@ -25,7 +25,7 @@
 @property (nonatomic, strong) MPRealTimeTimer *expirationTimer;
 @property (nonatomic, assign) BOOL hasTrackedImpression;
 @property (nonatomic, copy) NSString *fbPlacementId;
-
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation FacebookInterstitialCustomEvent
@@ -97,6 +97,7 @@
         [defaults synchronize];
         [self.delegate interstitialCustomEventDidAppear:self];
         [[HwAds instance] hwAdsEventByPlacementId:self.fbPlacementId hwSdkState:show isReward:NO Channel:@"Facebook"];
+        self.isClick = NO;
         [self cancelExpirationTimer];
     }
 }
@@ -183,7 +184,11 @@
 
 - (void)interstitialAdDidClick:(FBInterstitialAd *)interstitialAd
 {
-    [[HwAds instance] hwAdsEventByPlacementId:self.fbPlacementId hwSdkState:click isReward:NO Channel:@"Facebook"];
+    if (!self.isClick) {
+        [[HwAds instance] hwAdsEventByPlacementId:self.fbPlacementId hwSdkState:click isReward:NO Channel:@"Facebook"];
+        self.isClick = YES;
+    }
+    
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], self.fbPlacementId);
     [self.delegate trackClick];
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];

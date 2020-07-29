@@ -35,6 +35,31 @@
 
 #endif /* HwAds_h */
 
+typedef NS_ENUM(NSInteger, AJHwSDKUACType) {
+    
+    /**
+     * UAC新手引导完成打点
+     */
+    AJHWGuideFinish = 0,
+    /**
+     * UAC其他具体事件点
+     */
+    AJHWLevel ,
+    /**
+     * UAC看视频用户打点high
+     */
+    AJHWVideohigh ,
+    /**
+     * UAC看视频用户打点low
+     */
+    AJHWVideolow ,
+    /**
+     * UAC内购用户打点
+     */
+    AJHWPurchase ,
+
+};
+
 typedef NS_ENUM(NSUInteger, HWSDKState)
 {
     /**
@@ -91,7 +116,7 @@ typedef NS_ENUM(NSUInteger, HWSDKState)
      */
     isRewardLoaded,
     /**
-     * 内购打点标签
+     * SDK内购打点标签
      */
     HwPurchase,
     
@@ -156,11 +181,20 @@ typedef NS_ENUM(NSUInteger, HWSDKState)
 
 + (id)instance;
 
+//- (void)initSDK:(int)serverProjectId
+//    hwAppToken:(NSString *) hwAppToken
+//    hwImportantToken:(NSString *) hwImportantToken
+//    hwUACToken:(NSString *) hwUACToken
+//    hwMonetizationToken:(NSString *) hwMonetizationToken;
 - (void)initSDK:(int)serverProjectId
-    hwAppToken:(NSString *) hwAppToken
+     AppToken:(NSString *) hwAppToken
     hwImportantToken:(NSString *) hwImportantToken
-    hwUACToken:(NSString *) hwUACToken
-    hwMonetizationToken:(NSString *) hwMonetizationToken;
+    hwMonetizationToken:(NSString *) hwMonetizationToken
+    hwGuideFinishToken:(NSString *) guideFinishUACToken
+    hwLevelToken:(NSString *) levelUACToken
+    hwPurchaseToken:(NSString *) purchaseUACToken
+    hwVideohighToken:(NSString *) videohighUACToken
+    hwVideolowToken:(NSString *) videolowUACToken;
 
 - (void)showBanner;
 
@@ -186,6 +220,16 @@ typedef NS_ENUM(NSUInteger, HWSDKState)
 - (void)hwAnalyticsEvent:(NSString *)category
            action:(NSString *)action
            label:(NSString *)label;
+
+/// 哈乐沃德针对推广需要打的点（新方法）
+/// @param uacType 打点类型
+/// @param category category
+/// @param action 事件
+/// @param label label description
+- (void)hwAnalyticsEventByUACType:(AJHwSDKUACType)uacType
+            category:(NSString *)category
+            action:(NSString *)action
+            label:(NSString *)label;
 
 /// 打点新方法
 /// @param placementId 广告ID （若内购打点请将国家和金额用#拼接成字符串后传入，拼接规则：US#1.99        特别说明： 金额是转换成美金的价格;）

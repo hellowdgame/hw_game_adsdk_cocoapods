@@ -12,4 +12,5 @@
 
 @interface BUDMopub_RewardVideoCustomEventDelegate : NSObject<BURewardedVideoAdDelegate>
 @property (nonatomic, weak) CSJRewardedVideoCustomEvent *adapter;
+
 @end

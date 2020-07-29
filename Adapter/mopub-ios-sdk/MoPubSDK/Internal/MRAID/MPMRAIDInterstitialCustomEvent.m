@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) MPMRAIDInterstitialViewController *interstitial;
 
+@property (nonatomic, assign) BOOL isClick;
+
 @end
 
 @interface MPMRAIDInterstitialCustomEvent (MPInterstitialViewControllerDelegate) <MPInterstitialViewControllerDelegate>
@@ -50,6 +52,7 @@
 - (void)showInterstitialFromRootViewController:(UIViewController *)controller
 {
     [[HwAds instance] hwAdsEventByPlacementId:@"mopub" hwSdkState:show isReward:NO Channel:@"Mopub"];
+    self.isClick = NO;
     MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
     [self.interstitial presentInterstitialFromViewController:controller complete:^(NSError * error) {
         if (error != nil) {
@@ -115,7 +118,11 @@
 
 - (void)interstitialDidReceiveTapEvent:(id<MPInterstitialViewController>)interstitial
 {
-    [[HwAds instance] hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:NO Channel:@"Mopub"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:NO Channel:@"Mopub"];
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 

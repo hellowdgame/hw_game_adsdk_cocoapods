@@ -15,6 +15,8 @@
 @interface IronSourceInterstitialCustomEvent()<IronSourceInterstitialDelegate>
 @property (nonatomic, copy) NSString *instanceId;
 
+@property (nonatomic, assign)BOOL isClick;
+
 @end
 
 @implementation IronSourceInterstitialCustomEvent
@@ -87,6 +89,7 @@
               [self getAdNetworkId]);
     MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
     [[HwAds instance] hwAdsEventByPlacementId:self.instanceId hwSdkState:show isReward:NO Channel:@"Ironsource"];
+    self.isClick = NO;
     [[IronSourceManager sharedManager] presentInterstitialAdFromViewController:rootViewController instanceID:self.instanceId];
 }
 
@@ -178,7 +181,11 @@
     MPLogInfo(@"IronSource interstitial did click for instance %@ (current instance %@)",
               instanceId, [self getAdNetworkId]);
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], instanceId);
-    [[HwAds instance] hwAdsEventByPlacementId:self.instanceId hwSdkState:click isReward:NO Channel:@"Ironsource"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.instanceId hwSdkState:click isReward:NO Channel:@"Ironsource"];
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
     [self.delegate interstitialCustomEventWillLeaveApplication:self];
 }

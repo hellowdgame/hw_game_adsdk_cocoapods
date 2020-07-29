@@ -19,6 +19,8 @@
 @property (nonatomic, strong) MPHTMLInterstitialViewController *interstitial;
 @property (nonatomic, assign) BOOL trackedImpression;
 
+@property (nonatomic, assign) BOOL isClick;
+
 @end
 
 @interface MPHTMLInterstitialCustomEvent (MPInterstitialViewControllerDelegate) <MPInterstitialViewControllerDelegate>
@@ -59,6 +61,7 @@
 - (void)showInterstitialFromRootViewController:(UIViewController *)rootViewController
 {
     [[HwAds instance] hwAdsEventByPlacementId:@"mopub" hwSdkState:show isReward:NO Channel:@"Mopub"];
+    self.isClick = NO;
     MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
     [self.interstitial presentInterstitialFromViewController:rootViewController complete:^(NSError * error) {
         if (error != nil) {
@@ -129,7 +132,11 @@
 
 - (void)interstitialDidReceiveTapEvent:(id<MPInterstitialViewController>)interstitial
 {
-    [[HwAds instance] hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:NO Channel:@"Mopub"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:NO Channel:@"Mopub"];
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 

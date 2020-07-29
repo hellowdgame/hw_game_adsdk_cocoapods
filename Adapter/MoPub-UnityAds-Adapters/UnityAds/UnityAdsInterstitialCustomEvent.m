@@ -24,6 +24,7 @@ static NSString *const kUnityAdsOptionZoneIdKey = @"zoneId";
 @property BOOL loadRequested;
 @property (nonatomic, copy) NSString *placementId;
 
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation UnityAdsInterstitialCustomEvent
@@ -79,6 +80,7 @@ static NSString *const kUnityAdsOptionZoneIdKey = @"zoneId";
         MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
         [[UnityRouter sharedRouter] presentVideoAdFromViewController:viewController customerId:nil placementId:self.placementId settings:nil delegate:self];
         [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:NO Channel:@"Unityads"];
+        self.isClick = NO;
     } else {
         NSError *error = [self createErrorWith:@"Unity Ads failed to load failed to show Unity Interstitial"
                                  andReason:@"There is no available video ad."
@@ -159,7 +161,11 @@ static NSString *const kUnityAdsOptionZoneIdKey = @"zoneId";
 - (void) unityAdsDidClick:(NSString *)placementId
 {
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
-    [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"Unityads"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"Unityads"];
+    }
+    
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
 }
 

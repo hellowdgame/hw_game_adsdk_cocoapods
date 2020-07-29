@@ -22,6 +22,7 @@
 
 @property (nonatomic, copy) NSString *placementId;
 
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation SigmobInterstitialCustomEvent
@@ -84,6 +85,7 @@
         [[WindFullscreenVideoAd sharedInstance] playAd:controller withPlacementId:self.placementId options:nil error:&error];
         MPLogAdEvent([MPLogEvent adDidAppearForAdapter:NSStringFromClass(self.class)], self.placementId);
         [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:NO Channel:@"Sigmob"];
+        self.isClick = NO;
         [self.delegate interstitialCustomEventDidAppear:self];
     }
 }
@@ -153,7 +155,11 @@
  @param placementId 广告位Id
  */
 - (void)onFullscreenVideoAdClicked:(NSString *)placementId{
-    [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"Sigmob"];
+    if (!self.isClick) {
+        [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"Sigmob"];
+        self.isClick = YES;
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 

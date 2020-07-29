@@ -21,6 +21,9 @@
 @interface SigmobRewardedVideoCustomEvent () <WindRewardedVideoAdDelegate>
 
 @property (nonatomic, copy) NSString *placementId;
+
+@property (nonatomic, assign) BOOL isClick;
+
 @end
 
 @implementation SigmobRewardedVideoCustomEvent
@@ -85,6 +88,7 @@
         [self.delegate rewardedVideoWillAppearForCustomEvent:self];
         [[WindRewardedVideoAd sharedInstance]playAd:viewController withPlacementId:self.placementId options:nil error:&error];
         [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:YES Channel:@"Sigmob"];
+        self.isClick = NO;
         [self.delegate rewardedVideoDidAppearForCustomEvent:self];
     }else{
         NSError *error = [NSError errorWithCode:MPRewardedVideoAdErrorNoAdsAvailable localizedDescription:@"Failed to show Sigmob rewarded video: Sigmob now claims that there is no available video ad."];
@@ -163,7 +167,11 @@
  */
 -(void)onVideoAdClicked:(NSString * _Nullable)placementId{
     NSLog(@"sigmob onVideoAdClicked");
-    [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:YES Channel:@"Sigmob"];
+    if (!self.isClick) {
+        [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:YES Channel:@"Sigmob"];
+        self.isClick = YES;
+    }
+    
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
 }
 /**

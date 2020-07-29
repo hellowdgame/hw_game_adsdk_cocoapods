@@ -44,7 +44,10 @@
     
 - (void)rewardedVideoAdDidClick:(BURewardedVideoAd *)rewardedVideoAd {
     [self.adapter.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self.adapter];
-    [[HwAds instance]hwAdsEventByPlacementId:self.adapter.placementId hwSdkState:click isReward:YES Channel:@"CSJ"];
+    if (!self.adapter.isClick) {
+        [[HwAds instance]hwAdsEventByPlacementId:self.adapter.placementId hwSdkState:click isReward:YES Channel:@"CSJ"];
+    }
+    self.adapter.isClick = YES;
     [self.adapter.delegate trackClick];
 }
     
