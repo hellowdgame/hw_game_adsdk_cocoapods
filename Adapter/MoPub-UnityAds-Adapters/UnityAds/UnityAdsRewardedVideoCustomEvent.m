@@ -25,6 +25,7 @@ static NSString *const kUnityAdsOptionZoneIdKey = @"zoneId";
 
 @property (nonatomic, copy) NSString *placementId;
 
+@property (nonatomic, assign)BOOL isClick;
 @end
 
 @implementation UnityAdsRewardedVideoCustomEvent
@@ -89,6 +90,7 @@ static NSString *const kUnityAdsOptionZoneIdKey = @"zoneId";
         MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
         [[UnityRouter sharedRouter] presentVideoAdFromViewController:viewController customerId:customerId placementId:self.placementId settings:settings delegate:self];
         [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:YES Channel:@"Unityads"];
+        self.isClick = NO;
         MPLogAdEvent([MPLogEvent adShowSuccessForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
     } else {
         NSError *error = [NSError errorWithDomain:MoPubRewardedVideoAdsSDKDomain code:MPRewardedVideoAdErrorNoAdsAvailable userInfo:nil];
@@ -208,7 +210,10 @@ static NSString *const kUnityAdsOptionZoneIdKey = @"zoneId";
 - (void) unityAdsDidClick:(NSString *)placementId
 {
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
-    [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:YES Channel:@"Unityads"];
+    if (!self.isClick) {
+        [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:YES Channel:@"Unityads"];
+        self.isClick = YES;
+    }
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
 }
 

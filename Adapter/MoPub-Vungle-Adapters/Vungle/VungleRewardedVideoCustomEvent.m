@@ -24,6 +24,8 @@
 
 @property (nonatomic, copy) NSString *placementId;
 
+@property (nonatomic, assign) BOOL isClick;
+
 @end
 
 @implementation VungleRewardedVideoCustomEvent
@@ -56,6 +58,7 @@
     if ([[VungleRouter sharedRouter] isAdAvailableForPlacementId:self.placementId]) {
         VungleInstanceMediationSettings *settings = [self.delegate instanceMediationSettingsForClass:[VungleInstanceMediationSettings class]];
         [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:YES Channel:@"Vungle"];
+        self.isClick = NO;
         NSString *customerId = [self.delegate customerIdForRewardedVideoCustomEvent:self];
         [[VungleRouter sharedRouter] presentRewardedVideoAdFromViewController:viewController customerId:customerId settings:settings forPlacementId:self.placementId];
     } else {
@@ -119,7 +122,11 @@
 
 - (void)vungleAdWasTapped
 {
-    [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:YES Channel:@"Vungle"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:YES Channel:@"Vungle"];
+    }
+    
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getPlacementID]);
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
 }

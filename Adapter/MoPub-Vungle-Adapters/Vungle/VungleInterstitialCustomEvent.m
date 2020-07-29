@@ -24,6 +24,8 @@
 @property (nonatomic, copy) NSString *placementId;
 @property (nonatomic, copy) NSDictionary *options;
 
+@property (nonatomic, assign) BOOL isClick;
+
 @end
 
 @implementation VungleInterstitialCustomEvent
@@ -98,6 +100,7 @@
         
         MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.placementId);
         [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:NO Channel:@"Vungle"];
+        self.isClick = NO;
         [[VungleRouter sharedRouter] presentInterstitialAdFromViewController:rootViewController options:self.options forPlacementId:self.placementId];
     } else {
         NSError *error = [NSError errorWithCode:MOPUBErrorAdapterFailedToLoadAd localizedDescription:@"Failed to show Vungle video interstitial: Vungle now claims that there is no available video ad."];
@@ -157,7 +160,11 @@
 - (void)vungleAdWasTapped
 {
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getPlacementID]);
-    [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"Vungle"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.placementId hwSdkState:click isReward:NO Channel:@"Vungle"];
+    }
+    
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
 }
 

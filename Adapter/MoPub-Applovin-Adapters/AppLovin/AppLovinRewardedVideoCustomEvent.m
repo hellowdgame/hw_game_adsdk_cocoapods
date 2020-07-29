@@ -1,7 +1,7 @@
 #import "AppLovinRewardedVideoCustomEvent.h"
 #import "AppLovinAdapterConfiguration.h"
-#import <HwFrameworkUpTest1/HwAds.h>
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
+#import <HwFrameworkUpTest1/HwAds.h>
 #if __has_include("MoPub.h")
     #import "MPRewardedVideoReward.h"
     #import "MPError.h"
@@ -35,6 +35,7 @@
 @property (nonatomic, strong) ALAd *tokenAd;
 @property (nonatomic, copy) NSString *zoneIdentifier;
 
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation AppLovinRewardedVideoCustomEvent
@@ -140,6 +141,7 @@ static NSMutableDictionary<NSString *, ALIncentivizedInterstitialAd *> *ALGlobal
 {
     MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
     [[HwAds instance] hwAdsEventByPlacementId:self.zoneIdentifier hwSdkState:show isReward:YES Channel:@"Applovin"];
+    self.isClick = NO;
     if ( [self hasAdAvailable] )
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -235,7 +237,11 @@ static NSMutableDictionary<NSString *, ALIncentivizedInterstitialAd *> *ALGlobal
 {
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent: self];
     [self.delegate rewardedVideoWillLeaveApplicationForCustomEvent: self];
-    [[HwAds instance] hwAdsEventByPlacementId:self.zoneIdentifier hwSdkState:click isReward:YES Channel:@"Applovin"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.zoneIdentifier hwSdkState:click isReward:YES Channel:@"Applovin"];
+    }
+    
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
 }
 

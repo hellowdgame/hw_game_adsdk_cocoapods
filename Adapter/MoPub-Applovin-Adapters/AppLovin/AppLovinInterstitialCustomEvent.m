@@ -2,6 +2,7 @@
 #import "AppLovinAdapterConfiguration.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
 #import <HwFrameworkUpTest1/HwAds.h>
+
 #if __has_include("MoPub.h")
     #import "MPError.h"
     #import "MPLogging.h"
@@ -25,6 +26,8 @@
 @property (nonatomic, copy) NSString *zoneIdentifier; // The zone identifier this instance of the custom event is loading for
 @property (nonatomic, assign, getter=isTokenEvent) BOOL tokenEvent;
 @property (nonatomic, strong) ALAd *tokenAd;
+
+@property (nonatomic, assign) BOOL isClick;
 
 @end
 
@@ -244,7 +247,11 @@ static NSObject *ALGlobalInterstitialAdsLock;
     [self.delegate interstitialCustomEventDidReceiveTapEvent: self];
     [self.delegate interstitialCustomEventWillLeaveApplication: self];
     [self.delegate trackClick];
-    [[HwAds instance] hwAdsEventByPlacementId:self.zoneIdentifier hwSdkState:click isReward:NO Channel:@"Applovin"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.zoneIdentifier hwSdkState:click isReward:NO Channel:@"Applovin"];
+    }
+    
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
 }
 

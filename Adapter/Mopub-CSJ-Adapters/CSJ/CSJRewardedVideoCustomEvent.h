@@ -84,6 +84,7 @@
 //@property (nonatomic, getter=isAdValid, readonly) BOOL adValid;
 //@property (nonatomic,weak, nullable) BURewardedVideoAd* rewardedVideoAd;
 @property (nonatomic, copy) NSString *placementId;
+@property (nonatomic, assign) BOOL isClick;
 //-(instancetype) initWithSlotID:(NSString *)slotID rewardedVideoModel:(BURewardedVideoModel *)model;
 //-(void)loadAdData;
 //-(BOOL)showAdFromRootViewController:(UIViewController *)rootViewController;

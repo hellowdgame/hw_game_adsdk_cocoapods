@@ -15,6 +15,7 @@
 #import <CoreLocation/CoreLocation.h>
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
 #import <HwFrameworkUpTest1/HwAds.h>
+
 @interface MPGoogleAdMobInterstitialCustomEvent () <GADInterstitialDelegate>
 
 @property(nonatomic, strong) GADInterstitial *interstitial;
@@ -145,7 +146,6 @@ didFailToReceiveAdWithError:(GADRequestError *)error {
 - (void)interstitialWillLeaveApplication:(GADInterstitial *)ad {
     //将要离开app
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
-    [[HwAds instance] hwAdsEventByPlacementId:self.admobAdUnitId hwSdkState:click isReward:NO Channel:@"Admob"];
     [self.delegate interstitialCustomEventDidReceiveTapEvent:self];
     [self.delegate interstitialCustomEventWillLeaveApplication:self];
     [self.delegate trackClick];

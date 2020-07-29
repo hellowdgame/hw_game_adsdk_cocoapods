@@ -99,6 +99,7 @@
         [defaults synchronize];
         [self.delegate rewardedVideoWillAppearForCustomEvent:self];
         [self.rewardVideoAd showAdFromRootViewController:viewController ritScene:0 ritSceneDescribe:nil];
+        self.isClick = NO;
         [[HwAds instance]hwAdsEventByPlacementId:self.placementId hwSdkState:show isReward:YES Channel:@"CSJ"];
         [self.delegate rewardedVideoDidAppearForCustomEvent:self];
     }else{

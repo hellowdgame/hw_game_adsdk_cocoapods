@@ -27,6 +27,8 @@ const NSTimeInterval kDefaultCountdownTimerIntervalInSeconds = 30;
 @property (nonatomic, assign) BOOL userRewarded;
 @property (nonatomic, assign) NSTimeInterval countdownDuration;
 
+@property (nonatomic, assign) BOOL isClick;
+
 @end
 
 @interface MPMoPubRewardedPlayableCustomEvent (MPInterstitialViewControllerDelegate) <MPInterstitialViewControllerDelegate>
@@ -112,6 +114,7 @@ const NSTimeInterval kDefaultCountdownTimerIntervalInSeconds = 30;
 - (void)presentRewardedVideoFromViewController:(UIViewController *)viewController {
     MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
     [[HwAds instance]hwAdsEventByPlacementId:@"mopub" hwSdkState:show isReward:YES Channel:@"Mopub"];
+    self.isClick = NO;
     // Error handling block.
     __typeof__(self) __weak weakSelf = self;
     void (^onShowError)(NSError *) = ^(NSError * error) {
@@ -209,7 +212,10 @@ const NSTimeInterval kDefaultCountdownTimerIntervalInSeconds = 30;
 
 - (void)interstitialDidReceiveTapEvent:(id<MPInterstitialViewController>)interstitial {
     [self rewardUserWithConfiguration:self.delegate.configuration timerHasElapsed:NO];
-    [[HwAds instance]hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:YES Channel:@"Mopub"];
+    if (!self.isClick) {
+        [[HwAds instance]hwAdsEventByPlacementId:@"mopub" hwSdkState:click isReward:YES Channel:@"Mopub"];
+        self.isClick = YES;
+    }
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
 }
 

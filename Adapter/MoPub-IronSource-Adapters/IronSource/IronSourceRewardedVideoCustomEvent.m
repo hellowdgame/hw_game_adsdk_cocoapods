@@ -16,6 +16,7 @@
 
 #pragma mark Class local properties
 @property (nonatomic, copy) NSString *instanceID;
+@property (nonatomic, assign) BOOL isClick;
 @end
 @implementation IronSourceRewardedVideoCustomEvent
 
@@ -94,6 +95,7 @@
               [self getAdNetworkId]);
     MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], [self getAdNetworkId]);
     [[HwAds instance] hwAdsEventByPlacementId:self.instanceID hwSdkState:show isReward:YES Channel:@"Ironsource"];
+    self.isClick = NO;
     [[IronSourceManager sharedManager] presentRewardedAdFromViewController:viewController
                                                                  instanceID:_instanceID];}
 
@@ -180,7 +182,11 @@
     MPLogInfo(@"IronSource RewardedVideo did click for instance %@ (current instance %@)",
               instanceId, [self getAdNetworkId]);
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], instanceId);
-    [[HwAds instance] hwAdsEventByPlacementId:self.instanceID hwSdkState:click isReward:YES Channel:@"Ironsource"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.instanceID hwSdkState:click isReward:YES Channel:@"Ironsource"];
+    }
+    
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
     [self.delegate rewardedVideoWillLeaveApplicationForCustomEvent:self];
 }

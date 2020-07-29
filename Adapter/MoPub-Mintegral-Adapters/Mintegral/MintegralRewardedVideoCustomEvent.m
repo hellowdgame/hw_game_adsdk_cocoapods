@@ -27,6 +27,7 @@
 @property (nonatomic, copy) NSString *adPlacementId;
 @property (nonatomic, copy) NSString *adm;
 
+@property (nonatomic, assign) BOOL isClick;
 @end
 
 @implementation MintegralRewardedVideoCustomEvent
@@ -91,6 +92,7 @@
         
         if ([[MTGRewardAdManager sharedInstance] respondsToSelector:@selector(showVideoWithPlacementId:unitId:withRewardId:userId:delegate:viewController:)]) {
             [[HwAds instance] hwAdsEventByPlacementId:self.adUnitId hwSdkState:show isReward:YES Channel:@"Mintegral"];
+            self.isClick = NO;
             MPLogAdEvent([MPLogEvent adShowAttemptForAdapter:NSStringFromClass(self.class)], self.adUnitId);
             MPLogAdEvent([MPLogEvent adWillAppearForAdapter:NSStringFromClass(self.class)], self.adUnitId);
             
@@ -167,7 +169,11 @@
 - (void)onVideoAdClicked:(NSString *)placementId unitId:(NSString *)unitId {
     MPLogInfo(@"onVideoAdClicked");
     MPLogAdEvent([MPLogEvent adTappedForAdapter:NSStringFromClass(self.class)], self.adUnitId);
-    [[HwAds instance] hwAdsEventByPlacementId:self.adUnitId hwSdkState:click isReward:YES Channel:@"Mintegral"];
+    if (!self.isClick) {
+        self.isClick = YES;
+        [[HwAds instance] hwAdsEventByPlacementId:self.adUnitId hwSdkState:click isReward:YES Channel:@"Mintegral"];
+    }
+    
     [self.delegate rewardedVideoDidReceiveTapEventForCustomEvent:self];
     [self.delegate rewardedVideoWillLeaveApplicationForCustomEvent:self];
     
