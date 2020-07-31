@@ -1,7 +1,7 @@
 # hw_game_adsdk_cocoapods
 hw_game_adsdk_cocoapods
 
-本文档是IOS版变现SDK的Cocoapods集成说明，当前版本 `V0.0.2`，本SDK和手动集成有一定区别，如需手动集成请[移步这里](https://github.com/artwl/hwsdk_ios)参照手动集成文档集成。
+本文档是IOS版变现SDK的Cocoapods集成说明，当前版本 `V0.0.5`，本SDK和手动集成有一定区别，如需手动集成请[移步这里](https://github.com/artwl/hwsdk_ios)参照手动集成文档集成。
 
 ## 接入文档
 
@@ -14,6 +14,14 @@ hw_game_adsdk_cocoapods
 ## 本版特性 (6.1 - 2020年5月)
 
 详细内容请查看更新记录，有完整的更新内容列表。
+- **0.0.5 新特性（2020年7月23号）**
+- 1.Facebook打点不在调用Adjust打点
+- **0.0.4 新特性（2020年7月23号）**
+- 1.更新UAC打点方法
+
+- **0.0.3 新特性（2020年7月23号）**
+- 1.UAC打点新方法
+
 - **0.0.2 新特性（2020年7月23号）**
  - 1.修复打点传入参数错误引起打点数据为空bug
  
