@@ -4,7 +4,7 @@
 //
 //  Created by game team on 2020/05/20.
 //  Copyright © 2019 yjg. All rights reserved.
-//  current version V6.1
+//  current version V7.0
 //
 #import <Foundation/Foundation.h>
 #import "MPAdConversiontracker.h"
