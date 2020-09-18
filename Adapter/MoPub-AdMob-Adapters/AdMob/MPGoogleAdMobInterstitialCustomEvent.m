@@ -14,7 +14,7 @@
 #endif
 #import <CoreLocation/CoreLocation.h>
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 
 @interface MPGoogleAdMobInterstitialCustomEvent () <GADInterstitialDelegate>
 

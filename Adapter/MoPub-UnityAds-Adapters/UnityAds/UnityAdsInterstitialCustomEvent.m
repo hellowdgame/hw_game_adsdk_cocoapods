@@ -8,7 +8,7 @@
 #import "UnityAdsInterstitialCustomEvent.h"
 #import "UnityAdsInstanceMediationSettings.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 #import "UnityRouter.h"
 #if __has_include("MoPub.h")
     #import "MPLogging.h"

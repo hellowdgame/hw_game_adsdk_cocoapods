@@ -17,7 +17,7 @@
 
 #import "GdtRewardedVideoCustomEvent.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 #import "GDTRewardVideoAd.h"
 
 @interface GdtRewardedVideoCustomEvent () <GDTRewardedVideoAdDelegate>

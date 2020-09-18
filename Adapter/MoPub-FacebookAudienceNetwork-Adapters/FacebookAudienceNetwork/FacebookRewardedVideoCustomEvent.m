@@ -7,7 +7,7 @@
 #import "FacebookRewardedVideoCustomEvent.h"
 #import "FacebookAdapterConfiguration.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 
 #if __has_include("MoPub.h")
     #import "MPLogging.h"

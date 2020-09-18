@@ -10,7 +10,7 @@
 #import <BUAdSDK/BUAdSDK.h>
 #import "MPRewardedVideoReward.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 @implementation BUDMopub_RewardVideoCustomEventDelegate
 
 - (void)rewardedVideoAdDidLoad:(BURewardedVideoAd *)rewardedVideoAd {

@@ -9,7 +9,7 @@
 #import "CSJInterstitialCustomEvent.h"
 #import "CSJAdapterConfiguration.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 #import <BUAdSDK/BUAdSDK.h>
 
 #if __has_include("MoPub.h")

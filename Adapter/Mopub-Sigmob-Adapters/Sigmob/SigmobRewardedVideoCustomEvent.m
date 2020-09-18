@@ -16,7 +16,7 @@
 #import "SigmobRewardedVideoCustomEvent.h"
 #import <WindSDK/WindSDK.h>
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 
 @interface SigmobRewardedVideoCustomEvent () <WindRewardedVideoAdDelegate>
 

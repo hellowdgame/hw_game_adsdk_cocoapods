@@ -1,7 +1,7 @@
 #import "AppLovinRewardedVideoCustomEvent.h"
 #import "AppLovinAdapterConfiguration.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 #if __has_include("MoPub.h")
     #import "MPRewardedVideoReward.h"
     #import "MPError.h"

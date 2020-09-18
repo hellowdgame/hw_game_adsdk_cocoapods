@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "hw_game_adsdk_cocoapods"
-  spec.version      = "0.0.7"
+  spec.version      = "0.0.8"
   spec.summary      = "用于请求HW广告,一键集成SDK"
 
   # This description is used to generate tags and improve search results.
@@ -182,7 +182,7 @@ Pod::Spec.new do |spec|
   #  the lib prefix of their name.
   #
     #非系统框架
-    #spec.vendored_frameworks  = 'SDK/AppsFlyerFramework/AppsFlyerLib.framework','SDK/HwFrameworkUpTest1.framework','SDK/FBSDKCoreKit.framework','SDK/FBAudienceNetwork.framework','Adapter/mopub-ios-sdk/MoPubSDK/Viewability/MOAT/MPUBMoatMobileAppKit.framework'
+    #spec.vendored_frameworks  = 'SDK/HwAdsFramework.framework','SDK/FBSDKCoreKit.framework','SDK/FBAudienceNetwork.framework','Adapter/mopub-ios-sdk/MoPubSDK/Viewability/MOAT/MPUBMoatMobileAppKit.framework'
     #,'SDK/FBAudienceNetwork.framework'
     spec.vendored_frameworks = "SDK/**/*.framework"
     # 系统框架
@@ -211,7 +211,8 @@ Pod::Spec.new do |spec|
   spec.dependency "VungleSDK-iOS", "6.5.3"
   spec.dependency "Bytedance-UnionAD", "3.0.0.2"
   #, "~> 1.9.8.2"
-  spec.dependency "GDTMobSDK", "~> 4.11.8"
+  spec.dependency "GDTMobSDK","4.11.8"
+  #"~> 4.11.8"
   spec.dependency "SigmobAd-iOS", "2.18.2"
   spec.dependency "MintegralAdSDK/BannerAd", "6.2.0.0"
   spec.dependency "MintegralAdSDK/BidBannerAd", "6.2.0.0"
