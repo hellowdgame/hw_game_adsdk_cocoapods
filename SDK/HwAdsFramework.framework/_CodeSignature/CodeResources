@@ -6,19 +6,11 @@
 	<dict>
 		<key>Headers/HwAds.h</key>
 		<data>
-		Fjtm8RumB8dVk/ezcz38z+nnoW8=
-		</data>
-		<key>Headers/HwAdsFramework.h</key>
-		<data>
-		Wal130C78PoEWjDzaRNWipb5O7k=
+		GkXalbSvHcJhhDryl6v0v1vVG8U=
 		</data>
 		<key>Info.plist</key>
 		<data>
 		KeskZr7yE6s+S/d3SwzpAu7KhzU=
-		</data>
-		<key>Modules/module.modulemap</key>
-		<data>
-		nDOng2Iycw29hWVHB7kMr9QzeXg=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -27,33 +19,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Fjtm8RumB8dVk/ezcz38z+nnoW8=
+			GkXalbSvHcJhhDryl6v0v1vVG8U=
 			</data>
 			<key>hash2</key>
 			<data>
-			GzaQSob9sC4JeOtjA3VJ18NMmmeJ+bCU1/f6aMpDFsc=
-			</data>
-		</dict>
-		<key>Headers/HwAdsFramework.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Wal130C78PoEWjDzaRNWipb5O7k=
-			</data>
-			<key>hash2</key>
-			<data>
-			ml1eHHjv/yES3yGTiv3ETjvF/r+p9wVbAg5TTP4KJ4A=
-			</data>
-		</dict>
-		<key>Modules/module.modulemap</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			nDOng2Iycw29hWVHB7kMr9QzeXg=
-			</data>
-			<key>hash2</key>
-			<data>
-			M2ZfuOPOzCRSSGA6YJwCpfuTVxbUOfHMG1COYUxTuFA=
+			Hq9SEzFwFGz01AY/GjWK1AJW5Lmk58bGhEcRFMFlFTY=
 			</data>
 		</dict>
 	</dict>

@@ -7,10 +7,10 @@
 //  current version V7.0
 //
 #import <Foundation/Foundation.h>
-#import "MPAdConversiontracker.h"
-#import "MPInterstitialAdController.h"
-#import "MPRewardedVideo.h"
-#import "MPAdView.h"
+//#import "MPAdConversiontracker.h"
+//#import "MPInterstitialAdController.h"
+//#import "MPRewardedVideo.h"
+//#import "MPAdView.h"
 
 //mopub test id
 #define BANNERID @"0ac59b0996d947309c33f59d6676399f"
@@ -161,15 +161,15 @@ typedef NS_ENUM(NSUInteger, HWSDKState)
 - (void)hwAdsBannerLoadSuccess;
 @end
 
-@interface HwAds : NSObject<MPAdViewDelegate,MPInterstitialAdControllerDelegate,MPRewardedVideoDelegate>
+@interface HwAds : NSObject
 {
 //    Appcontroller *appController;
 //    UIView *view;
 //    RootViewController *localViewController;
 }
 
-@property (nonatomic, retain) MPInterstitialAdController *moPubinterstitial;
-@property (nonatomic) MPAdView *adView;
+//@property (nonatomic, retain) MPInterstitialAdController *moPubinterstitial;
+//@property (nonatomic) MPAdView *adView;
 
 @property (nonatomic, weak) id<HwAdsDelegate> hwAdsDelegate;
 @property (nonatomic, weak) id<HWAdsInterDelegate> hwAdsInterDelegate;
