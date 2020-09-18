@@ -7,10 +7,7 @@
 //  current version V7.0
 //
 #import <Foundation/Foundation.h>
-//#import "MPAdConversiontracker.h"
-//#import "MPInterstitialAdController.h"
-//#import "MPRewardedVideo.h"
-//#import "MPAdView.h"
+
 
 //mopub test id
 #define BANNERID @"0ac59b0996d947309c33f59d6676399f"

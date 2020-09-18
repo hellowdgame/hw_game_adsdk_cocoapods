@@ -1,0 +1,6 @@
+framework module HwAdsFramework {
+  umbrella header "HwAdsFramework.h"
+
+  export *
+  module * { export * }
+}
