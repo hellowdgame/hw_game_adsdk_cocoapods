@@ -15,7 +15,7 @@
 #import "MPCountdownTimerView.h"
 #import "UIView+MPAdditions.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 
 const NSTimeInterval kDefaultCountdownTimerIntervalInSeconds = 30;
 

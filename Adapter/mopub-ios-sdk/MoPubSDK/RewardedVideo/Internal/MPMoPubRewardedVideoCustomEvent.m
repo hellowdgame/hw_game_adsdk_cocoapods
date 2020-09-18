@@ -16,7 +16,7 @@
 #import "MPRewardedVideoReward.h"
 #import "MPRewardedVideoError.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 
 @interface MPMoPubRewardedVideoCustomEvent()
 

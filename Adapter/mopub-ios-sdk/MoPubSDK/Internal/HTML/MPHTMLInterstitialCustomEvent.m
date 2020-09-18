@@ -12,7 +12,7 @@
 #import "MPError.h"
 #import "MPLogging.h"
 //#import <HwFrameworkUpTest1.framework/Headers/HwAds.h>
-#import <HwFrameworkUpTest1/HwAds.h>
+#import <HwAdsFramework/HwAds.h>
 
 @interface MPHTMLInterstitialCustomEvent ()
 
