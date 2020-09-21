@@ -17,7 +17,6 @@ hw_game_adsdk_cocoapods
 - **0.0.8 新特性（2020年9月18号）**
 - 1.删除AppsFlyerTracker
 - 2.删除Mintegral广告商和对应的adapter
-- 3.更改cocoapods验证不通过问题
 - **0.0.7 新特性（2020年8月24号）**
 - 1.修复安装应用后广告间隔时间不准确bug
 - **0.0.6 新特性（2020年8月11号）**
